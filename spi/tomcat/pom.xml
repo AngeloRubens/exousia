@@ -24,7 +24,7 @@
     <parent>
        <groupId>org.glassfish.exousia</groupId>
        <artifactId>spi</artifactId>
-       <version>4.0.0-SNAPSHOT</version>
+       <version>4.0.0-M2</version>
     </parent>
 
     <artifactId>exousia.spi.tomcat</artifactId>
