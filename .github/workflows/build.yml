@@ -1,0 +1,34 @@
+name: Build and test
+
+# Fork-only: builds and tests the branches under review and their bases.
+on:
+  push:
+    branches: [ ci ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: [ main, perf/authorization-checks, 3.x, perf/authorization-checks-3.x ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build and test
+        run: mvn -B -ntp install
+      - name: Name the artifact
+        id: name
+        run: echo "name=exousia-$(echo '${{ matrix.ref }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.name.outputs.name }}
+          path: |
+            impl/target/*.jar
+            impl/target/surefire-reports/*.txt
