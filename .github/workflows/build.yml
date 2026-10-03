@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ref: [ main, perf/authorization-checks, 3.x, perf/authorization-checks-3.x ]
+        ref: [ main, perf/authorization-checks, 3.x, perf/authorization-checks-3.x, test/mutant-excluded ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
