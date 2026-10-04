@@ -1,6 +1,6 @@
 name: Build and test
 
-# Fork-only: builds and tests the branches under review and their bases.
+# Fork-only: builds and tests the branches under review and their bases. (run 3)
 on:
   push:
     branches: [ ci ]
